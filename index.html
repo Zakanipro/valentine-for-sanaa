@@ -1,153 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>For You 💗</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Only For You ❤️</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ffe4ec, #fdf1f7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card {
-      background: white;
-      padding: 40px 30px;
-      border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      width: 320px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bear {
-      font-size: 64px;
-      margin-bottom: 10px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0); }
-    }
-
-    h1 {
-      font-size: 20px;
-      color: #444;
-      margin-bottom: 30px;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      position: relative;
-    }
-
-    button {
-      padding: 12px 26px;
-      border-radius: 999px;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    #yesBtn {
-      background: #4ade80;
-      color: white;
-      box-shadow: 0 8px 20px rgba(74, 222, 128, 0.4);
-    }
-
-    #yesBtn:hover {
-      transform: scale(1.08);
-    }
-
-    #noBtn {
-      background: #f87171;
-      color: white;
-      position: relative;
-    }
-
-    .message {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #ffd6e8, #fff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.6s ease;
-    }
-
-    .message.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .message h2 {
-      color: #d63384;
-      font-size: 22px;
-      animation: pop 0.8s ease forwards;
-    }
-
-    @keyframes pop {
-      0% {
-        transform: scale(0.6);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-  </style>
+<style>
+*{
+  box-sizing:border-box;
+  font-family: "Poppins", system-ui, sans-serif;
+}
+body{
+  margin:0;
+  background:linear-gradient(135deg,#ffd6e8,#fff);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.page{
+  width:100%;
+  max-width:420px;
+  background:white;
+  border-radius:20px;
+  padding:24px;
+  text-align:center;
+  display:none;
+  box-shadow:0 20px 40px rgba(0,0,0,0.1);
+}
+.page.active{display:block;}
+h1,h2{color:#ff4d7a;}
+p{color:#444;font-size:15px;line-height:1.6;}
+button{
+  border:none;
+  padding:12px 22px;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  margin:10px;
+}
+.yes{
+  background:#4ade80;
+  color:#064;
+}
+.no{
+  background:#ff6b6b;
+  color:white;
+  position:relative;
+}
+.small{
+  font-size:13px;
+  color:#ff4d7a;
+  margin-top:10px;
+}
+.heart{
+  font-size:60px;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.15);}
+  100%{transform:scale(1);}
+}
+</style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="bear">🧸💐</div>
-    <h1>Will you be my Valentine?</h1>
 
-    <div class="buttons">
-      <button id="yesBtn">Yes</button>
-      <button id="noBtn">No</button>
-    </div>
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h1>Hey you 💖</h1>
+  <p>I made this only for you…</p>
+  <div class="heart">❤️</div>
+  <button class="yes" onclick="go(2)">Continue</button>
+</div>
 
-    <div class="message" id="loveMessage">
-      <h2>i love you so much<br>my little baby Sana! 💖✨</h2>
-    </div>
-  </div>
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h2>I need to ask you something 😳</h2>
+  <p>But please… be honest</p>
+  <button class="yes" onclick="go(3)">Okay</button>
+</div>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const message = document.getElementById("loveMessage");
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <h2>Do you love me? 💕</h2>
+  <button class="yes" onclick="go(5)">Yes</button>
+  <button class="no" id="noBtn">No</button>
+  <div class="small" id="noText">هاي مبزنه</div>
+</div>
 
-    noBtn.addEventListener("mouseenter", () => {
-      const x = Math.random() * 120 - 60;
-      const y = Math.random() * 80 - 40;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    });
+<!-- PAGE 4 (never really reachable 😈) -->
+<div class="page" id="p4">
+  <p>Nice try 😏</p>
+</div>
 
-    yesBtn.addEventListener("click", () => {
-      message.classList.add("show");
-    });
-  </script>
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <h2>اعشقك هواي حبيبتي 💖</h2>
+  <p>
+    اموت عليك يروحي <br><br>
+    i wanna kiss your lips so bad <br>
+    hope i marry you soon as possible <br>
+    my baby girl
+  </p>
+  <div class="heart">💍</div>
+</div>
+
+<script>
+function go(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+}
+
+const noBtn = document.getElementById("noBtn");
+const noText = document.getElementById("noText");
+
+const texts = [
+  "هاي مبزنه",
+  "i love you so baaaddd dont click no",
+  "i will give you more kiss in your neck if you click no",
+  "no mean i will tell rafid you go out at night"
+];
+
+let i = 0;
+
+noBtn.addEventListener("click", ()=>{
+  const x = Math.random()*200 - 100;
+  const y = Math.random()*120 - 60;
+  noBtn.style.transform = `translate(${x}px,${y}px)`;
+  noText.textContent = texts[i % texts.length];
+  i++;
+});
+</script>
+
 </body>
 </html>
